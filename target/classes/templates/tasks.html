@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/default">
+
+<body>
+    <div class="current-page" layout:fragment="content">
+        <main>
+            <nav class="z-depth-0">
+                <div class="nav-wrapper white">
+                    <ul id="slide-out" class="side-nav">
+                        <li><a href="/"><i class="material-icons">home</i>Home</a></li>
+                        <li><a href="#!"><i class="material-icons">notifications</i>Notificações</a></li>
+                        <li><a href="#!"><i class="material-icons">live_help</i>Ajuda</a></li>
+                    </ul>
+                    <a href="#" data-activates="slide-out" class="button-collapse show-on-large"><i class="material-icons grey-text darken-4">menu</i></a>
+                    <ul class="right">
+                        <!-- Dropdown Trigger -->
+                        <a class='dropdown-button' href='#' data-activates='account-menu'><i class="material-icons  grey-text darken-4">more_vert</i></a>
+
+                        <!-- Dropdown Structure -->
+                        <ul id='account-menu' class='dropdown-content'>
+                            <li>
+                                <form th:action="@{/logout}" method="POST">
+                                    <button type="submit" style="border:none;background:transparent;margin-left:10px">
+                                        <i class="material-icons">exit_to_app</i>Sair
+                                    </button>
+                                </form>
+                            </li>
+                            <li><a href="#!" style="color:rgba(0, 0, 0, 0.87)"><i class="material-icons">palette</i>Conta</a></li>
+                        </ul>
+                    </ul>
+                </div>
+            </nav>
+            <div th:inline="text" class="container animated fadeIn">
+                <ul class="collapsible z-depth-0" data-collapsible="accordion" style="border:none">
+                    <li th:each="attr : ${tasks}">
+                        <div class="collapsible-header">
+                            <h1 class="flow-text">[[${attr.name}]]</h1>
+                            <i th:text="${attr.finished} ? 'done' : ''" class="material-icons blue-text" style="margin-top: 2.1rem;"></i>
+                            <span class="badge" style="margin-top: 2.1rem;">
+                    <!-- Dropdown Trigger -->
+                    <a class='dropdown-button' href='#' th:attr="data-activates=${attr.id}"><i class="material-icons  blue-text">more_vert</i></a>
+
+                                <!-- Dropdown Structure -->
+                    <ul th:id="${attr.id}" class='dropdown-content'>
+                        <li><a th:href="@{/update-task(id=${attr.id})}"><i class="material-icons">edit</i>Atualizar</a></li>
+                        <li><a th:href="@{/delete-task(id=${attr.id})}"><i class="material-icons">delete_forever</i>Excluir</a></li>
+                    </ul>
+                </span>
+                        </div>
+                        <div class="collapsible-body">
+                            <p>[[${attr.description}]]</p>
+                            <span th:text="${#calendars.format(attr.date_created,'dd MMM yyyy')}" class="right grey-text lighten-1"></span>
+                        </div>
+                    </li>
+                </ul>
+                <div th:if="${tasks.empty}" class="vertical-align">
+                    <div class="valgin center-block">
+                        <h1 class="center-align"><img src="http://localhost:8080/img/empty.png"></h1>
+                        <p class="center-align grey-text flow-text">Nenhuma tarefa por enquanto.</p>
+                    </div>
+                </div>
+                <div class="fixed-action-btn horizontal">
+                    <a class="btn-floating btn-large yellow darken-3">
+                        <i class="large material-icons">assignment_turned_in</i>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="#" class="btn-floating red tooltipped" data-position="top" data-tooltip="Pesquisar por uma tarefa">
+                                <i class="material-icons">search</i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/" class="btn-floating yellow darken-1 tooltipped" data-position="top" data-tooltip="Home">
+                                <i class="material-icons">home</i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tasks" class="btn-floating green tooltipped" data-position="top" data-tooltip="Visualizar todas as tarefas">
+                                <i class="material-icons">playlist_add_check</i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/new-task" class="btn-floating blue tooltipped" data-position="top" data-tooltip="Adicionar uma tarefa">
+                                <i class="material-icons">add</i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div> <!--/.container-->
+        </main>
+    </div> <!--/.current-page-->
+</body>
+</html>

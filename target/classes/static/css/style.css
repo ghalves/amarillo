@@ -1,0 +1,41 @@
+/* Custom styles */
+
+.vertical-align  {
+    margin: 0px;
+	padding:0px;
+	float: left;
+	width:100%;
+	position:absolute;
+	top: 50%;
+	transform: translateY(-50%) translateX(-50%);
+	left:50%;
+}
+
+.bg {
+    background: url('http://localhost:8080/img/bg.jpg') no-repeat center center fixed;
+     -webkit-background-size: cover;
+     -moz-background-size: cover;
+     -o-background-size: cover;
+     background-size: cover;
+}
+
+.unloading {
+    background-color: #f2f2f2;
+    position: fixed;
+    z-index: 10000;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    -webkit-transform: translate3d(-300%,0,0);
+    transform: translate3d(-300%,0,0);
+    transition: -webkit-transform 1.5s ease-out;
+    transition: transform 1.5s ease-out;
+    transition: transform 1.5s ease-out,-webkit-transform 1.5s ease-out;
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    transition: opacity .6s,-webkit-transform .5s ease-out;
+    transition: transform .5s ease-out,opacity .6s;
+    transition: transform .5s ease-out,opacity .6s,-webkit-transform .5s ease-out;
+}
