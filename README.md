@@ -1,2 +1,2 @@
 # Amarillo
-A Progressive Web App made with Spring Boot, Hibernate, Thymeleaf and jQuery
+A PWA made with spring boot, hibernate, thymeleaf and jQuery
