@@ -1,2 +1,2 @@
 # Amarillo
-A PWA made with spring boot, hibernate, thymeleaf and jQuery
+A PWA made with Spring Boot, Hibernate, Thymeleaf and jQuery
